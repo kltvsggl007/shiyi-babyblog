@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>小十一的博客</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap" rel="stylesheet">
+
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="__CSS__/style-starter.css">
+  </head>
+  <body>
+<!-- header -->
+{include file="common/header"}
+<!-- //header -->
+
+<nav id="breadcrumbs" class="breadcrumbs">
+	<div class="container page-wrapper">
+		<a href="{:url('index/index')}">首页</a> / <a href="{:url('category/index',array('cateid'=>$categoryRes['id']))}">{$categoryRes.category_name}</a> /<span class="breadcrumb_last" aria-current="page">{$articleRes.title}</span>
+	</div>
+</nav>
+<div class="w3l-searchblock w3l-homeblock1 py-5">
+    <div class="container py-lg-4 py-md-3">
+        <!-- block -->
+        <div class="row">
+            <div class="col-lg-8 most-recent">
+                <h3 class="section-title-left">{$articleRes.title}</h3>
+               
+                <div class="row">
+                    <div class="col-md-12 item">
+                        <div class="card">
+                            <div class="card-header p-0 position-relative">
+                                <a href="#blog-single">
+                                    <img class="card-img-bottom d-block radius-image" src="__UPLOADS__/{$articleRes.pic}" alt="{$articleRes.title}">
+                                </a>
+                            </div>
+                            <div class="card-body p-0 blog-details">
+                                <a href="#blog-single" class="blog-desc">{$articleRes.description}</a>
+                                {$articleRes.contents}
+                                <div class="buttons-singles tags align-items-center mt-3 mb-1">
+                                    <?php
+                                        $arr=explode(',',$articleRes['keywords']);
+                                        foreach ($arr as $key=>$value){
+                                            echo "<a href='__SEARCH__index.html?keywords=$value'>$value</a>";
+                                        }
+                                    ?>
+                                </div>
+                                <div class="author align-items-center mt-2 mb-1">
+                                    <span>作者：{$authorInfo.author_name}</span>
+                                </div>
+                                <ul class="blog-meta">
+                                    <li class="meta-item blog-lesson">
+                                        <span class="meta-value"> {$articleRes.add_time|date="Y-m-d",###} </span>
+                                    </li>
+                                    <li class="meta-item blog-students">
+                                        <span class="meta-value">热点： {$articleRes.click}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="section-title-left mt-5">相关推荐</h3>
+                <div class="row">
+                    {volist name="relatedRes" id="related"}
+                    <div class="col-lg-6 col-md-6 item mt-5 pt-lg-3">
+                        <div class="card">
+                            <div class="card-header p-0 position-relative">
+                                <a href="{:url('article/index',array('artid'=>$related['id']))}">
+                                    <img class="card-img-bottom d-block radius-image" src="__UPLOADS__/{$related.pic}" alt="Card image cap">
+                                </a>
+                            </div>
+                            <div class="card-body p-0 blog-details">
+                                <a href="#blog-single" class="blog-desc">{$related.title}</a>
+                            </div>
+                        </div>
+                    </div>
+                    {/volist}
+                </div>
+
+                <h3 class="section-title-left mt-5">相关阅读</h3>
+                <div class="row">
+                    {volist name="relatedTagsRes" id="rtr"}
+                    <div class="col-lg-6 col-md-6 item mt-5 pt-lg-3">
+                        <div class="card">
+                            <div class="card-body p-0 blog-details">
+                                <a href="{:url('article/index',array('artid'=>$rtr['0']))}" class="blog-desc">{$rtr.1}</a>
+                            </div>
+                        </div>
+                    </div>
+                    {/volist}
+                </div>
+
+
+            </div>
+            <div class="col-lg-4 trending mt-lg-0 mt-5 mb-lg-5">
+                <div class="pos-sticky">
+                {include file="common/column_right_1"}
+                {include file="common/column_right_2"}
+                </div>
+            </div>
+        </div>
+        <!-- //block-->
+
+    </div>
+</div>
+
+<!-- footer -->
+{include file="common/footer"}
+<!-- //footer -->
+
+<!-- Template JavaScript -->
+<script src="__JS__/theme-change.js"></script>
+
+<script src="__JS__/jquery-3.3.1.min.js"></script>
+
+<!-- disable body scroll which navbar is in active -->
+<script>
+  $(function () {
+    $('.navbar-toggler').click(function () {
+      $('body').toggleClass('noscroll');
+    })
+  });
+</script>
+<!-- disable body scroll which navbar is in active -->
+
+<script src="__JS__/bootstrap.min.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+<h3 class="section-title-left mt-5">相关推荐 </h3>
+{volist name="recommendRes" id="rr"}
+<div class="grids5-info">
+    <h4>{$i}</h4>
+    <div class="blog-info">
+        <a href="{:url('article/index',array('artid'=>$rr['id']))}" class="blog-desc1"> {$rr.title}</a>
+        <div class="author align-items-center mt-2 mb-1">
+            <span>{$rr.description}</span>
+        </div>
+        <ul class="blog-meta">
+            <li class="meta-item blog-lesson">
+                <span class="meta-value"> {$rr.add_time|date="Y-m-d",###} </span>
+            </li>
+            <li class="meta-item blog-students">
+                <span class="meta-value">热点: {$rr.click}</span>
+            </li>
+        </ul>
+    </div>
+</div>
+{/volist}

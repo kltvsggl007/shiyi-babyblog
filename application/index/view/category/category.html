@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>目录-小十一的博客</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap" rel="stylesheet">
+
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="__CSS__/style-starter.css">
+  </head>
+  <body>
+<!-- header -->
+{include file="common/header"}
+<!-- //header -->
+
+<nav id="breadcrumbs" class="breadcrumbs">
+	<div class="container page-wrapper">
+		<a href="{:url('index/index')}">首页</a> / <span class="breadcrumb_last" aria-current="page"><a href="{:url('category/index',array('cateid'=>$selectedCategory['id']))}">{$selectedCategory.category_name}</a></span>
+	</div>
+</nav>
+<div class="w3l-searchblock w3l-homeblock1 py-5">
+    <div class="container py-lg-4 py-md-3">
+        <!-- block -->
+        <div class="row">
+            <div class="col-lg-8 most-recent">
+                <h3 class="section-title-left">{$selectedCategory.category_name}</h3>
+               
+                <div class="row">
+                    {volist name="articleRes" id="articles"}
+                    <div class="col-lg-6 col-md-6 item">
+                        <div class="card">
+                            <div class="card-header p-0 position-relative">
+                                <a href="{:url('article/index',array('artid'=>$articles['id']))}">
+                                    <img class="card-img-bottom d-block radius-image" src="{if condition="$articles['pic'] neq ''"}__UPLOADS__{$articles.pic}{else /}__IMG__/screenshot9.jpg{/if}" alt="{$articles.title}">
+                                </a>
+                            </div>
+                            <div class="card-body p-0 blog-details">
+                                <a href="{:url('article/index',array('artid'=>$articles['id']))}" class="blog-desc">{$articles.title}</a>
+                                <p>{$articles.description}</p>
+                                <div class="buttons-singles tags align-items-center mt-3 mb-1">
+                                    <?php
+                                        $arr=explode(',',$articles['keywords']);
+                                        foreach ($arr as $key=>$value){
+                                            echo "<a href='__SEARCH__index.html?keywords=$value'>$value</a>";
+                                        }
+                                    ?>
+                                </div>
+                                <ul class="blog-meta">
+                                    <li class="meta-item blog-lesson">
+                                        <span class="meta-value"> {$articles['add_time']|date="Y-m-d",###} </span>
+                                    </li>
+                                    <li class="meta-item blog-students">
+                                        <span class="meta-value">{$articles.click}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    {/volist}
+                </div>
+
+                <!-- pagination -->
+                <div class="category_paginate pagination-wrapper mt-5">
+                    {$articleRes->render()}
+                </div>
+                <!-- //pagination -->
+            </div>
+            <div class="col-lg-4 trending mt-lg-0 mt-5 mb-lg-5">
+                <div class="pos-sticky">
+                {include file="common/column_right_1"}
+                {include file="common/column_right_2"}
+                </div>
+            </div>
+        </div>
+        <!-- //block-->
+    </div>
+</div>
+
+<!-- footer -->
+{include file="common/footer"}
+<!-- //footer -->
+
+<!-- Template JavaScript -->
+<script src="__JS__/theme-change.js"></script>
+
+<script src="__JS__/jquery-3.3.1.min.js"></script>
+
+<!-- disable body scroll which navbar is in active -->
+<script>
+  $(function () {
+    $('.navbar-toggler').click(function () {
+      $('body').toggleClass('noscroll');
+    })
+  });
+</script>
+<!-- disable body scroll which navbar is in active -->
+
+<script src="__JS__/bootstrap.min.js"></script>
+
+</body>
+
+</html>
